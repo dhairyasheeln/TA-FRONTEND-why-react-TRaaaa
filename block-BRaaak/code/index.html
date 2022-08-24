@@ -11,7 +11,7 @@
 
     <!--React and ReactDOM-->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>4
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
     <!--Babel-->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -91,31 +91,32 @@
   },
 ];
 
-    let ArticlesUI=(articles)=>(
-        <>
-            <h1>Hello</h1>
-        </>
-    );
 
-    let collection= (< ArticlesUI(articles) />);
 
     let root=document.querySelector('.root');
     var duration=(new Date()-cardInfo.date).toString();
 
-    let card=<div className="col-30 card">
+    function Card(props){
+            return(
+                <div className="col-30 card">
                 <div className="img-outer">
-                    <img className="width-100" src={cardInfo.imageURL} alt=""/>
+                    <img className="width-100" src={props.articleInfo.imageURL} alt=""/>
 
-                    <span className="photos-label">{cardInfo.category.toUpperCase()}</span>
-                    <span className="date-label center">{cardInfo.date.getDate()}<br/>{months[cardInfo.date.getMonth()].slice(0,3)}</span>
+                    <span className="photos-label">{props.articleInfo.category.toUpperCase()}</span>
+                    <span className="date-label center">{props.articleInfo.date.getDate()}<br/>{months[props.articleInfo.date.getMonth()].slice(0,3)}</span>
                 </div>
-                <h1 className="article-title">{cardInfo.title}</h1>
-                <h3 className="article-subtitle">{cardInfo.subTitle}</h3>
-                <p className="article-desc">{cardInfo.description}</p>
+                <h1 className="article-title">{props.articleInfo.title}</h1>
+                <h3 className="article-subtitle">{props.articleInfo.subTitle}</h3>
+                <p className="article-desc">{props.articleInfo.description}</p>
                 <span className="mins">6 min ago</span>
-                <span className="comments">{cardInfo.comments} comments</span>
-    </div>
-    ReactDOM.render(card,root);
+                <span className="comments">{props.articleInfo.comments} comments</span>
+            </div>
+            )
+}
+    function Cards(){
+        return articles.map(article=><Card articleInfo={article}/>)
+    }
+    ReactDOM.render(<Cards />,root);
     </script>
 
 
