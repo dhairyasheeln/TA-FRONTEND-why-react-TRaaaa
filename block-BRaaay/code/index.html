@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=width, initial-scale=version">
+    <title>title</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script src="./colors.js"></script>
+
+</head>
+<body>
+    <div class="root container">
+
+    </div>
+
+    
+
+    <script type="text/babel">
+
+        
+        let root=document.querySelector('.root');
+
+        function Colors(){
+            return Object.keys(colors).map((key)=>{return <Color name={key} allColors={colors[key]}/>});
+        }
+
+        function Color(props){
+            console.log(props)
+            return(
+                <div className="color-outer">
+                    <div className="colorName">
+                        {props.name}    
+                    </div>
+                    <div class="colorShades">
+                        <ul>
+                        {props.allColors.map((hexCode,index)=>{
+                            return <li class="ColorInfo">
+                                <div className="colorBlock" style={{backgroundColor:hexCode}}></div>
+                                <div className="colorCode">
+                                    <span>{index===0 ? 50 : index*100}</span>
+                                    <span>{hexCode}</span> 
+                                </div>    
+                            </li>
+                        })}
+                    </ul>
+                    </div>
+                    
+                </div>
+            )
+        }
+        ReactDOM.render(<Colors/>,root)
+    </script>
+</body>
+</html>
